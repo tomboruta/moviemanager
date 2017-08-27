@@ -75,18 +75,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="movie in movies">
+            <tr v-for="movie in list">
                 <td>@{{ movie.title }}</td>
                 <td>@{{ movie.format }}</td>
                 <td>@{{ movie.length }}</td>
                 <td>@{{ movie.releaseYear }}</td>
                 <td>@{{ movie.rating }}</td>
+                <td><button @click="deleteMovie(movie.id)" class="btn btn-danger btn-xs pull-right">Delete</button></td>
             </tr>
             </tbody>
         </table>
 
+        <h3>Add New Movie</h3>
 
-        <form method="POST" action="/movies" @submit.prevent="onSubmit">
+        <form method="POST" action="/movies" @submit.prevent="addMovie">
             <table class="table">
                 <tbody>
                 <tr>
@@ -106,7 +108,7 @@
                         <input type="text" id="rating" name="rating" class="input" placeholder="Rating" v-model="movie.rating">
                     </td>
                     <td>
-                        <input type="submit" class="btn btn-primary">
+                        <input type="submit" class="btn btn-primary" value="Add">
                     </td>
                 </tr>
                 </tbody>
@@ -117,15 +119,6 @@
 
 </div>
 <!--/ Main container-->
-
-
-
-<!--Footer-->
-<footer class="page-footer center-on-small-only elegant-color-dark">
-</footer>
-<!--/.Footer-->
-
-
 
 <!-- SCRIPTS -->
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>

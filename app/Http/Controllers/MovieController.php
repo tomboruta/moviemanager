@@ -14,7 +14,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        return Movie::all();
     }
 
     /**
@@ -43,9 +43,9 @@ class MovieController extends Controller
         $movie->releaseYear = $request->input('movie.releaseYear');
         $movie->rating = $request->input('movie.rating');
 
-        print_r($movie);die;
+        $movie->save();
 
-        return $request;
+        return 'successful';
     }
 
     /**
