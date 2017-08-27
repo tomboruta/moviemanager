@@ -46,7 +46,7 @@
     <div id="app">
         <table class="table">
             <thead>
-            <tr>
+            <tr v-if="list.length > 0">
                 <th>Title</th>
                 <th>Format</th>
                 <th>Length</th>
