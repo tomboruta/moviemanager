@@ -24,10 +24,14 @@ new Vue({
         },
 
         addMovie: function() {
+            var self = this;
             axios.post('/api/movies', this.$data)
             .then(function (response) {
-                this.movie = response.data;
-                console.log(this.movie);
+                self.movie.title = '';
+                self.movie.format = '';
+                self.movie.length = '';
+                self.movie.releaseYear = '';
+                self.movie.rating = '';
             })
             .catch(function (error) {
                 console.log(error);
