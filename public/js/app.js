@@ -27,6 +27,13 @@ new Vue({
             var self = this;
             axios.post('/api/movies', this.$data)
             .then(function (response) {
+                self.list.push({
+                    title: self.movie.title,
+                    format: self.movie.format,
+                    length: self.movie.length,
+                    releaseYear: self.movie.releaseYear,
+                    rating: self.movie.rating,
+                })
                 self.movie.title = '';
                 self.movie.format = '';
                 self.movie.length = '';
