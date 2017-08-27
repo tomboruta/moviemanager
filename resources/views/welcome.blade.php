@@ -28,10 +28,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Movies</a>
+                        <a class="nav-link" href="/list">Movies</a>
                     </li>
                 </ul>
             </div>
@@ -55,45 +55,60 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="movie in list">
+            <tr v-for="(movie,index) in list">
                 <td>@{{ movie.title }}</td>
                 <td>@{{ movie.format }}</td>
                 <td>@{{ movie.length }}</td>
                 <td>@{{ movie.releaseYear }}</td>
                 <td>@{{ movie.rating }}</td>
-                <td><button @click="deleteMovie(movie.id)" class="btn btn-danger btn-xs pull-right">Delete</button></td>
+                <td><button @click="deleteMovie(index,movie.id)" class="btn btn-danger btn-xs pull-right">Delete</button></td>
             </tr>
             </tbody>
         </table>
 
         <h3>Add New Movie</h3>
 
-        <form method="POST" action="/movies" @submit.prevent="addMovie">
-            <table class="table">
-                <tbody>
-                <tr>
-                    <td>
-                        <input type="text" id="title" name="title" class="input" placeholder="Movie Title" v-model="movie.title">
-                    </td>
-                    <td>
-                        <input type="text" id="format" name="format" class="input" placeholder="Format" v-model="movie.format">
-                    </td>
-                    <td>
-                        <input type="text" id="length" name="length" class="input" placeholder="Length" v-model="movie.length">
-                    </td>
-                    <td>
-                        <input type="text" id="releaseYear" name="releaseYear" class="input" placeholder="Release Year" v-model="movie.releaseYear">
-                    </td>
-                    <td>
-                        <input type="text" id="rating" name="rating" class="input" placeholder="Rating" v-model="movie.rating">
-                    </td>
-                    <td>
-                        <input type="submit" class="btn btn-primary" value="Add">
-                    </td>
-                </tr>
-                </tbody>
-
-            </table>
+        <form class="form-inline" method="POST" action="/movies" @submit.prevent="addMovie">
+            <div class="md-form form-group">
+                <input type="text" id="title" name="title" class="input" placeholder="Title" v-model="movie.title" required maxlength="50">
+            </div>
+            <div class="md-form form-group">
+                <select id="format" name="format" class="input" v-model="movie.format">
+                    <option value="DVD" selected="selected">DVD</option>
+                    <option value="Streaming">Streaming</option>
+                    <option value="VHS">VHS</option>
+                </select>
+                <label for="format">Format</label>
+            </div>
+            <div class="md-form form-group">
+                <input type="text" id="length" name="length" class="input" placeholder="Length" v-model="movie.length">
+            </div>
+            <div class="md-form form-group">
+                <input type="text" id="releaseYear" name="releaseYear" class="input" placeholder="Release Year" v-model="movie.releaseYear">
+            </div>
+            <div class="md-form form-group">
+                <input id="rating" name="rating" type="radio" id="radio1" v-model="movie.rating" value="1">
+                <label for="radio1">1</label>
+            </div>
+            <div class="md-form form-group">
+                <input id="rating" name="rating" type="radio" id="radio2" v-model="movie.rating" value="2">
+                <label for="radio2">2</label>
+            </div>
+            <div class="md-form form-group">
+                <input id="rating" name="rating" type="radio" id="radio3" v-model="movie.rating" value="3">
+                <label for="radio3">3</label>
+            </div>
+            <div class="md-form form-group">
+                <input id="rating" name="rating" type="radio" id="radio4" v-model="movie.rating" value="4">
+                <label for="radio4">4</label>
+            </div>
+            <div class="md-form form-group">
+                <input id="rating" name="rating" type="radio" id="radio5" v-model="movie.rating" value="5">
+                <label for="radio5">5</label>
+            </div>
+            <div class="md-form form-group">
+                <input type="submit" class="btn btn-indigo" value="Add">
+            </div>
         </form>
     </div>
 
