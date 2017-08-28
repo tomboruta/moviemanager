@@ -34,21 +34,21 @@
                     <input type="text" id="title" name="title" class="input" placeholder="Title" v-model="movie.title" required maxlength="50">
                 </div>
                 <div class="md-form form-group">
-                    <select id="format" name="format" class="input" v-model="movie.format">
-                        <option value="DVD" selected="selected">DVD</option>
+                    <select id="format" name="format" class="input" v-model="movie.format" required>
+                        <option value="DVD" selected>DVD</option>
                         <option value="Streaming">Streaming</option>
                         <option value="VHS">VHS</option>
                     </select>
                     <label for="format">Format</label>
                 </div>
                 <div class="md-form form-group">
-                    <input type="text" id="length" name="length" class="input" placeholder="Length" v-model="movie.length">
+                    <input type="number" id="length" name="length" class="input" required min="1" max="500" placeholder="Length" v-model="movie.length">
                 </div>
                 <div class="md-form form-group">
-                    <input type="text" id="releaseYear" name="releaseYear" class="input" placeholder="Release Year" v-model="movie.releaseYear">
+                    <input type="number" id="releaseYear" name="releaseYear" class="input" required min="1800" max="2100" placeholder="Release Year" v-model="movie.releaseYear">
                 </div>
                 <div class="md-form form-group">
-                    <input id="rating" name="rating" type="radio" id="radio1" v-model="movie.rating" value="1">
+                    <input id="rating" name="rating" type="radio" id="radio1" v-model="movie.rating" value="1" selected>
                     <label for="radio1">1</label>
                 </div>
                 <div class="md-form form-group">
