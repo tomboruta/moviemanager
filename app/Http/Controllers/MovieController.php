@@ -37,11 +37,11 @@ class MovieController extends Controller
     {
         $movie = new Movie();
 
-        $movie->title = $request->input('movie.title');
-        $movie->format = $request->input('movie.format');
-        $movie->length = $request->input('movie.length');
-        $movie->releaseYear = $request->input('movie.releaseYear');
-        $movie->rating = $request->input('movie.rating');
+        $movie->title = $request->input('title');
+        $movie->format = $request->input('format');
+        $movie->length = $request->input('length');
+        $movie->releaseYear = $request->input('releaseYear');
+        $movie->rating = $request->input('rating');
 
         $movie->save();
 

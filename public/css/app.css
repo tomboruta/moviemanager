@@ -1,3 +1,50 @@
 .full-height, .full-height body, .full-height header, .full-height header .view {
     height:70px;
 }
+
+/* Tables */
+th {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+td {
+}
+
+th {
+    color: #555;
+}
+
+th.active {
+    color: #000;
+    font-weight: bold;
+}
+
+th.active .arrow {
+    opacity: 1;
+}
+
+.arrow {
+    color: #000;
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    opacity: 0.20;
+}
+
+.arrow.asc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #000;
+}
+
+.arrow.dsc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #000;
+}

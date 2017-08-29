@@ -1,31 +1,45 @@
 @extends('app')
 
 @section('content')
-    <!-- Main container-->
+    <script type="text/x-template" id="grid-template">
+        <table class="table" v-if="filteredData.length > 0">
+            <thead>
+            <tr>
+                <th v-for="key in columns"
+                    @click="sortBy(key)"
+                    :class="{ active: sortKey == key }"
+                    class="sort-by-headers"
+                >
+                    @{{ key | capitalize }}
+                    <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(entry,index) in filteredData">
+                <td v-for="key in columns">
+                    <span v-if="key === 'length'">@{{convertMinutesToHoursAndMinutes(entry[key])}}</span>
+                    <span v-else>@{{entry[key]}}</span>
+                </td>
+                <td>
+                    <button @click="deleteMovie(index,entry.id)" class="btn btn-danger btn-xs pull-right">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </script>
+
     <div class="container">
 
         <div id="app">
-            <table class="table">
-                <thead>
-                <tr v-if="list.length > 0">
-                    <th>Title</th>
-                    <th>Format</th>
-                    <th>Length</th>
-                    <th>Release Year</th>
-                    <th>Rating</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(movie,index) in list">
-                    <td>@{{ movie.title }}</td>
-                    <td>@{{ movie.format }}</td>
-                    <td>@{{ movie.length }}</td>
-                    <td>@{{ movie.releaseYear }}</td>
-                    <td>@{{ movie.rating }}</td>
-                    <td><button @click="deleteMovie(index,movie.id)" class="btn btn-danger btn-xs pull-right">Delete</button></td>
-                </tr>
-                </tbody>
-            </table>
+            <form id="search" v-if="gridData.length > 0">
+                Search <input name="query" v-model="searchQuery">
+            </form>
+            <grid
+                :data="gridData"
+                :columns="gridColumns"
+                :filter-key="searchQuery">
+            </grid>
 
             <h3>Add New Movie</h3>
 
