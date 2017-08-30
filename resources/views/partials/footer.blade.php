@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <h5 class="titles font-bold mt-3 mb-4">Tom's Movie Manager</h5>
+                &nbsp;
             </div>
         </div>
     </div>
