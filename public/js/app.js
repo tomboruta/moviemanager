@@ -1,3 +1,79 @@
+Vue.component('Modal', {
+    template: '#modal-template',
+    props: ['show'],
+    methods: {
+        close: function () {
+            this.$emit('close');
+        }
+    },
+    mounted: function () {
+        document.addEventListener("keydown", (e) => {
+            if (this.show && e.keyCode == 27) {
+            this.close();
+        }
+    });
+    }
+});
+
+Vue.component('NewMovieModal', {
+    template: '#new-movie-modal-template',
+    props: ['show'],
+    data: function () {
+        return {
+            movie: {
+                title: '',
+                format: '',
+                length: '',
+                releaseYear: '',
+                rating: ''
+            }
+        };
+    },
+    methods: {
+        close: function () {
+            this.$emit('close');
+        },
+        saveNewMovie: function () {
+            var self = this;
+            console.log(self.movie);
+            axios.post('/api/movies', self.movie)
+                .then(function (response) {
+                    self.$parent.updateGrid();
+                    self.movie.title='';
+                    self.movie.format='';
+                    self.movie.length='';
+                    self.movie.releaseYear='';
+                    self.movie.rating='';
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            this.close();
+        }
+    }
+});
+
+Vue.component('EditMovieModal', {
+    template: '#edit-movie-modal-template',
+    props: ['show'],
+    data: function () {
+        return {
+            comment: ''
+        };
+    },
+    methods: {
+        close: function () {
+            this.$emit('close');
+            this.comment = '';
+        },
+        saveEditMovie: function () {
+            // Some save logic goes here...
+
+            this.close();
+        }
+    }
+});
+
 Vue.component('grid', {
     template: '#grid-template',
     props: {
@@ -12,7 +88,8 @@ Vue.component('grid', {
         });
         return {
             sortKey: '',
-            sortOrders: sortOrders
+            sortOrders: sortOrders,
+            showEditMovieModal: false
         }
     },
     computed: {
@@ -78,31 +155,19 @@ var app = new Vue({
         searchQuery: '',
         gridColumns: ['title', 'format', 'length', 'releaseYear', 'rating'],
         gridData: [],
-        movie: {}
+        movie: {},
+        showNewMovieModal: false,
+        showEditMovieModal: false
     },
     mounted: function() {
-        var self = this;
-        axios.get('/api/movies').then(function (response) {
-            self.gridData = response.data;
-        });
+        this.updateGrid();
     },
     methods: {
-        addMovie: function () {
+        updateGrid: function(){
             var self = this;
-            axios.post('/api/movies', self.movie)
-                .then(function (response) {
-                    self.gridData.push({
-                        title: self.movie.title,
-                        format: self.movie.format,
-                        length: self.movie.length,
-                        releaseYear: self.movie.releaseYear,
-                        rating: self.movie.rating,
-                    })
-                    self.movie = {};
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            axios.get('/api/movies').then(function (response) {
+                self.gridData = response.data;
+            });
         }
     }
 });

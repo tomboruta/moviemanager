@@ -19,8 +19,11 @@
                 <span v-else>@{{entry[key]}}</span>
             </td>
             <td>
-                <button @click="deleteMovie(index,entry.id)" class="btn btn-danger btn-md pull-right">Delete</button>
-                <button class="btn btn-primary btn-md pull-right">Edit</button>
+                <button class="btn btn-danger btn-md pull-right" @click="deleteMovie(index,entry.id)">Delete</button>
+                <button class="btn btn-primary btn-md pull-right" @click="showEditMovieModal = true">Edit</button>
+
+                <edit-movie-modal :show="showEditMovieModal" @close="showEditMovieModal = false"></edit-movie-modal>
+
             </td>
         </tr>
         </tbody>
