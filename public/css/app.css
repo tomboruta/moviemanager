@@ -1,5 +1,14 @@
 .full-height, .full-height body, .full-height header, .full-height header .view {
-    height:70px;
+    height:0;
+}
+
+.splash-image {
+    width: 100%;
+}
+
+.list-page {
+    padding-top: 70px;
+    padding-bottom: 20px;
 }
 
 /* Modals */
@@ -120,4 +129,8 @@ th.active .arrow {
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 4px solid #000;
+}
+
+footer.page-footer {
+    margin-top: 0;
 }

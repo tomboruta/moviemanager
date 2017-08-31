@@ -1,10 +1,9 @@
 @extends('app')
 
 @section('content')
-    <!-- Main container-->
-    <div class="container">
-
-        Welcome!
-
+    <a href="/list">
+        <img class="splash-image" src="/img/redSeatTheater.jpg">
+    </a>
+    <div id="app">
     </div>
 @endsection

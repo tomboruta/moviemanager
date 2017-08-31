@@ -7,7 +7,7 @@
 
     <div class="container">
 
-        <div id="app">
+        <div id="app" class="list-page">
             <form class="float-right" id="search" v-if="gridData.length > 0">
                 Search <input name="query" v-model="searchQuery">
             </form>
