@@ -20,12 +20,18 @@
             </td>
             <td>
                 <button class="btn btn-danger btn-md pull-right" @click="deleteMovie(index,entry.id)">Delete</button>
-                <button class="btn btn-primary btn-md pull-right" @click="showEditMovieModal = true">Edit</button>
+                <button class="btn btn-primary btn-md pull-right" @click="showEditModal(entry.id)">Edit</button>
 
-                <edit-movie-modal :show="showEditMovieModal" @close="showEditMovieModal = false"></edit-movie-modal>
-
+                <edit-movie-modal
+                        :id="'editmodal'+entry.id"
+                        :movie="entry"
+                        :show="openedEditMovieModal === entry.id"
+                        @close="openedEditMovieModal = null"
+                >
+                </edit-movie-modal>
             </td>
         </tr>
         </tbody>
     </table>
+
 </script>

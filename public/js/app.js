@@ -35,7 +35,6 @@ Vue.component('NewMovieModal', {
         },
         saveNewMovie: function () {
             var self = this;
-            console.log(self.movie);
             axios.post('/api/movies', self.movie)
                 .then(function (response) {
                     self.$parent.updateGrid();
@@ -55,19 +54,25 @@ Vue.component('NewMovieModal', {
 
 Vue.component('EditMovieModal', {
     template: '#edit-movie-modal-template',
-    props: ['show'],
-    data: function () {
-        return {
-            comment: ''
-        };
-    },
+    props: ['show','id','movie'],
     methods: {
         close: function () {
             this.$emit('close');
-            this.comment = '';
         },
         saveEditMovie: function () {
-            // Some save logic goes here...
+            var self = this;
+            axios.post('/api/movies/'+self.movie.id+'?_method=PATCH', self.movie)
+                .then(function (response) {
+                    self.$parent.updateGrid();
+                    self.movie.title='';
+                    self.movie.format='';
+                    self.movie.length='';
+                    self.movie.releaseYear='';
+                    self.movie.rating='';
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
             this.close();
         }
@@ -89,7 +94,7 @@ Vue.component('grid', {
         return {
             sortKey: '',
             sortOrders: sortOrders,
-            showEditMovieModal: false
+            openedEditMovieModal: null
         }
     },
     computed: {
@@ -136,6 +141,9 @@ Vue.component('grid', {
             }
             return hours + " hr " + minutes + " m";
         },
+        showEditModal: function (id) {
+            this.openedEditMovieModal = id;
+        },
         deleteMovie: function (index, id) {
             var self = this;
             axios.delete('api/movies/' + id)
@@ -156,8 +164,7 @@ var app = new Vue({
         gridColumns: ['title', 'format', 'length', 'releaseYear', 'rating'],
         gridData: [],
         movie: {},
-        showNewMovieModal: false,
-        showEditMovieModal: false
+        showNewMovieModal: false
     },
     mounted: function() {
         this.updateGrid();

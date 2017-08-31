@@ -67,7 +67,6 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        //
     }
 
     /**
@@ -79,7 +78,15 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        //
+        $movie->title = $request->input('title');
+        $movie->format = $request->input('format');
+        $movie->length = $request->input('length');
+        $movie->releaseYear = $request->input('releaseYear');
+        $movie->rating = $request->input('rating');
+
+        $movie->save();
+
+        return 'successful';
     }
 
     /**
