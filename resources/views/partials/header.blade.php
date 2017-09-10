@@ -14,6 +14,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/list">Movies</a>
                     </li>
+                    <li class="nav-item">
+                        @if (!$user)
+                            <a class="nav-link" href="/login/github">Login with Github</a>
+                        @else
+                            Hello {{$user}}
+                        @endif
+                    </li>
                 </ul>
             </div>
         </div>
