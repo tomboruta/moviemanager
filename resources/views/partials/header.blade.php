@@ -17,8 +17,6 @@
                     <li class="nav-item">
                         @if (!$user)
                             <a class="nav-link" href="/login/github">Login with Github</a>
-                        @else
-                            Hello {{$user}}
                         @endif
                     </li>
                 </ul>

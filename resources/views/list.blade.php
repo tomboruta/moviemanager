@@ -13,6 +13,9 @@
             </form>
             <div class="float-left">
                 <button class="btn btn-default btn-lgd pull-right" @click="showNewMovieModal = true">Add New Movie</button>
+                @if($user)
+                    <span class="nav-link">Hello {{$user}}</span>
+                @endif
             </div>
             <grid
                 :data="gridData"
